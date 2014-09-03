@@ -1,28 +1,66 @@
-<%= form_for @feedback, url: {action: "create"}, :html => { :multipart => true } do |f| %>
-  <p>
-    <%=f.label 'User_id'%>
-    <%=f.text_field :user_code, :value => @user_code%>
-  </p>
-  <p>
-    <%=f.label 'Email'%>
-    <%= f.text_field :email %>  
-  </p>
- 
-  <%if @category == "game_problem"%>
-    <%= f.datetime_select :bug_happen%>
-  <%end%>
-  </br>
-  <p>
-    <%= f.text_area :content, size: "60x12" %>
-  </p>
- 
-  <%if ['money_problem', 'game_problem'].include?(@category)%>
+
+  <%= form_for @feedback, url: {action: "create"}, :html => { :multipart => true } do |f| %>
     <p>
-      <%=f.label 'picture'%>
-      <%= f.file_field :avatar %>
+      <%=f.text_field :user_code, :class => "form-control", :value => @user_code, :placeholder => "User_id"%>
     </p>
-    
+    <p>
+      <%= f.text_field :email, :class => "form-control", :placeholder => "Email" %>  
+    </p>
+   
+    <%if ['money_problem', 'game_problem'].include?(@category)%>
+      <%= f.datetime_select :bug_happen%>
+    <%end%>
+    </br>
+    <%if @category == 'money_problem'%>
+      <div class="radio">
+        <label>
+          <%= f.radio_button :purchase_record, 'purchase with record', :checked => true %>
+          有购买记录
+        </label>
+      </div>
+       <div class="radio">
+        <label>
+          <%= f.radio_button :purchase_record, 'purchase no record'%>
+          没有购买记录
+        </label>
+      </div>
+       <div class="radio">
+        <label>
+          <%= f.radio_button :purchase_record, 'with record cancelled' %>
+          有购买记录
+        </label>
+      </div>
+      
+      <p>
+        <%= f.text_field :purchase_number, :class => "form-control", :placeholder => "在appstore或Google play上的购买号码"%>  
+      </p> 
+    <%end%>
+    <p>
+      <%= f.text_area :content, :class => "form-control", :rows => '5', :placeholder => "内容"%>
+    </p>
+   
+    <%if @category == 'game_problem'%>
+      <p>
+        <%=f.label 'picture'%>
+        <%= f.file_field :avatar %>
+      </p>
+      
+    <%end%>
+    <br/>
+    <%= f.submit "送信" %>
   <%end%>
-  <br/>
-  <%= f.submit "送信" %>
-<%end%>
+
+<script>
+$( "#feedback_purchase_record_purchase_no_record" ).click(function() {
+  $("#feedback_purchase_number").hide();
+});
+
+$("#feedback_purchase_record_purchase_with_record").click(function() {
+  $("#feedback_purchase_number").show();
+});
+
+$("#feedback_purchase_record_with_record_cancelled").click(function() {
+  $("#feedback_purchase_number").show();
+});
+
+</script>

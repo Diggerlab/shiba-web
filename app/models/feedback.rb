@@ -16,7 +16,8 @@ class Feedback < ActiveRecord::Base
   end
 
   private  
-  def randomize_file_name  
+  def randomize_file_name
+    return if avatar_file_name == nil
     extension = File.extname(avatar_file_name).downcase  
     self.avatar.instance_write(:file_name, "#{Time.now.strftime("%Y%m%d%H%M%S")}_#{self.user_code}#{extension}")  
   end  

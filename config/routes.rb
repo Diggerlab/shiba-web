@@ -6,7 +6,11 @@ Rails.application.routes.draw do
       get :game_suggestion
     end
   end
-  resources :notices, only:  :index
+  resources :notices, only:  :index do
+    collection do
+      post :close
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 gem "paperclip", "~> 4.2"
 gem 'aws-sdk'
+gem 'dotenv-rails'
 
 gem 'flexslider' #for scroll
 # Use jquery as the JavaScript library

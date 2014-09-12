@@ -23,7 +23,7 @@ db/*.sqlite3
 public/upload/
 public/uploads/
 public/system/
-config/secrets.yml
+.env
 
 .DS_Store
 

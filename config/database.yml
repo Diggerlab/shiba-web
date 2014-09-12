@@ -8,8 +8,8 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: shiba_web
+  database: <%=ENV['DATABASE_NAME']%>
   pool: 5
-  username: shiba
-  password: shiba
+  username: <%=ENV['DATABASE_USER']%>
+  password: <%=ENV['DATABASE_PASS']%>
   socket: /tmp/mysql.sock

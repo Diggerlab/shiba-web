@@ -13,7 +13,8 @@ class FeedbacksController < ApplicationController
   def create
     @feedback = Feedback.create!(feedback_params)
     @upload = @feedback.uploads.create!(feedback_uploads)
-    render json: @feedback
+    flash[:notice] = "You post feedback successfully!"
+    redirect_to new_feedback_url
   end
 
   def money_problem
